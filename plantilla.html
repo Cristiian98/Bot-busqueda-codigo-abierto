@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Informe de proyectos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        h1 {
+            margin-top: 50px;
+            text-align: center;
+            background-color: #000000;
+            color: white;
+            padding: 10px;
+        }
+
+        .card {
+            margin-top: 30px;
+        }
+
+        .fecha-hora {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .proyecto {
+            margin-bottom: 20px;
+        }
+
+        .proyecto .card-body {
+            background-color: #f8f9fa;
+        }
+
+        .proyecto h2 {
+            font-size: 1.5rem;
+            color: #007bff;
+        }
+
+        .proyecto p {
+            margin-bottom: 5px;
+        }
+
+        .proyecto p strong {
+            font-weight: bold;
+        }
+
+        .proyecto p a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .proyecto p a:hover {
+            text-decoration: underline;
+        }
+
+        .proyecto .fuente {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5">Informes de proyectos</h1>
+        <h2>Resultados de búsqueda: {{ query }}</h2>
+        <div class="fecha-hora">
+            <p>Fecha del informe: {{ fecha_informe }}</p>
+            <p>Hora de registro: {{ hora_registro }}</p>
+        </div>
+
+        {% for proyecto in proyectos_informe %}
+        <div class="proyecto">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">{{ proyecto.nombre }}</h2>
+                    <p class="card-text"><strong>Descripción:</strong> {{ proyecto.descripcion }}</p>
+                    <p class="card-text"><strong>Lenguaje:</strong> {{ proyecto.lenguaje }}</p>
+                    <p class="card-text"><strong>Estrellas:</strong> {{ proyecto.estrellas }}</p>
+                    <p class="card-text"><strong>Solicitudes Pendientes:</strong> {{ proyecto.solicitudes_pendientes }}
+                    </p>
+                    <p class="card-text"><strong>Última actualización:</strong> {{ proyecto.ultima_actualizacion }}</p>
+                    <p class="card-text"><strong>Enlace al repositorio:</strong> <a href="{{ proyecto.enlace_repo }}">{{
+                            proyecto.enlace_repo }}</a></p>
+                    {% if proyecto.fuente == "GitHub" %}
+                    <p class="fuente">Fuente: GitHub</p>
+                    {% else %}
+                    <p class="fuente">Fuente: GitLab</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
